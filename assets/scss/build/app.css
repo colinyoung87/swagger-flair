@@ -136,8 +136,6 @@ body.loading .content {
   border-bottom: 1px solid #e6e6e6;
   opacity: 1;
   transition: opacity .3s ease; }
-  .content:last-child {
-    padding-bottom: 40%; }
   .content > .section {
     position: relative;
     padding-top: 70px; }
