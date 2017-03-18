@@ -1,0 +1,16 @@
+.responses {
+  padding: 20px 30px;
+  background: #eee;
+  font-family: $codeFontStack;
+
+  > h3 {
+    font-size: 0.8em;
+    padding: 10px 0;
+    border-bottom: 1px solid #fff;
+  }
+
+  > p {
+    font-size: 0.7em;
+    padding: 15px 0 10px;
+  }
+}

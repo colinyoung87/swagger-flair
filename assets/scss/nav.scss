@@ -1,0 +1,69 @@
+.nav {
+  width: 307px;
+  text-align: left;
+  height: calc(100% - 70px);
+  float: right;
+  border-right: 1px solid $borderColor;
+  font-size: 1em;
+
+  a {
+    text-decoration: none;
+    color: $strongTextColor;
+
+    &:hover {
+      color: $primaryColor;
+    }
+  }
+
+  // First level
+  > ul {
+    list-style: none;
+    width: 100%;
+    color: #454545;
+    padding-top: 30px;
+  }
+
+  > ul > li {
+    padding-bottom: 5px;
+  }
+
+  > ul > li > a {
+    display: block;
+    padding: 5px 20px;
+  }
+
+  // Second level
+  > ul li {
+    > ul {
+      display: none;
+      list-style: none;
+      padding: 5px 0 10px 30px;
+      font-size: 0.9em;
+    }
+
+    > ul li {
+      padding-bottom: 5px;
+
+      > a span {
+        font-weight: $bold;
+        display: inline-block;
+        width: 32px;
+      }
+    }
+
+    > ul li a:before {
+      content: "-";
+      padding-right: 5px;
+    }
+
+    &.active {
+      > a {
+        color: $primaryColor;
+      }
+
+      > ul {
+        display: block
+      }
+    }
+  }
+}

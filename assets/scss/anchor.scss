@@ -1,0 +1,18 @@
+.anchor {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  transform: translate(6px, 6px);
+
+  background: url("../img/ico-link.png") no-repeat center;
+  background-color: rgba($primaryColor, 0.2);
+  background-size: 14px;
+
+  transition: .3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($primaryColor, 1);
+  }
+}

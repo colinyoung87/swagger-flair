@@ -1,0 +1,36 @@
+.form-response {
+  padding: 0!important;
+  display: none;
+
+  .status {
+    background: $primaryColor;
+    color: #fff;
+    position: relative;
+  }
+
+  a.close {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: 0.8em;
+  }
+
+  h3 {
+    font-size: 0.9em;
+    font-weight: $light;
+    padding: 15px 25px;
+
+    span {
+      font-weight: $bold;
+    }
+  }
+
+  .code {
+    background: $textColor;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+  }
+}

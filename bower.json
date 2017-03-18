@@ -1,0 +1,9 @@
+{
+    "name": "swagger-flair",
+    "version": "0.0.0",
+    "dependencies": {
+        "jquery": "latest",
+        "ejs": "latest",
+        "underscore": "latest"
+    }
+}

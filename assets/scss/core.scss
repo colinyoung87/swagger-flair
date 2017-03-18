@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: $fontStack;
+  font-size: 16px;
+  background: $subtleColor;
+}
+
+.wrapper {
+  width: 100%;
+  min-width: 1024px;
+  height: 100%;
+  background: #fff;
+}
+
+a {
+  color: $primaryColor;
+}
+
+.left {
+  background: $subtleColor;
+  width: 30%;
+  height: 100%;
+  text-align: right;
+  overflow-y: auto;
+  position: absolute;
+  transition: left .3s ease;
+  left: 0;
+  top: 0;
+}
+
+.right {
+  background: #fff;
+  width: 70%;
+  height: 100%;
+  min-width: 716px;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .left, .right {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    float: left;
+  }
+}
