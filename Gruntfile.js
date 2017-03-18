@@ -25,17 +25,7 @@ module.exports = function(grunt) {
     uglify: {
       build : {
         files : {
-          // 'public/js/app.min.js' : [
-          //   // bower components
-          //   'components/jquery/dist/jquery.js',
-          //   'components/underscore/underscore.js',
-          //   'components/ejs/ejs.js',
-
-          //   // everything else
-          //   'assets/js/*.js'
-          // ],
-
-          'public/js/app.js' : [
+          'public/js/app.min.js' : [
             // bower components
             'components/jquery/dist/jquery.js',
             'components/underscore/underscore.js',
@@ -43,7 +33,7 @@ module.exports = function(grunt) {
 
             // everything else
             'assets/js/*.js'
-          ]
+          ],
         }
       }
     },
