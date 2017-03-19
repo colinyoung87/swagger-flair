@@ -1,5 +1,5 @@
 $(function() {
-  window.App = {
+  window.Flair = {
     config: window.config,
     sections: [],
     scrollTimeout: null,
@@ -9,31 +9,31 @@ $(function() {
         method: "GET",
         url: config.docs_url
       })
-      .done(App.boot)
+      .done(Flair.boot)
       .fail(function(){
         console.error("Could not fetch docs from:", config.docs_url)
       });
     }, this),
 
     boot: function(docs) {
-      window.addEventListener('popstate', App.toHashSection);
+      window.addEventListener('popstate', Flair.toHashSection);
 
-      App.buildSections(docs.paths);
-      App.setTitle(docs.info.title);
-      App.renderNav();
-      App.renderContent();
+      Flair.buildSections(docs.paths);
+      Flair.setTitle(docs.info.title);
+      Flair.renderNav();
+      Flair.renderContent();
 
-      App.ready();
+      Flair.ready();
     },
 
     ready: function() {
-      App.delegateEvents();
+      Flair.delegateEvents();
       PR.prettyPrint();
 
       $('.app-loading').fadeOut(300, function(){
         $(this).remove();
 
-        App.toHashSection();
+        Flair.toHashSection();
 
         setTimeout(function() {
           $('body').removeClass('loading');
@@ -46,9 +46,9 @@ $(function() {
 
       _.each(paths, function(data, url) {
         _.each(data, function(props, method) {
-          slug = props.tags[0].replace(/[^a-z0-9 -_]/g, "").replace(" ", "-");
+          slug = props.tags[0].toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /, "-");
 
-          collection = _.find(App.sections, function(section) {
+          collection = _.find(Flair.sections, function(section) {
             return section.slug === slug;
           });
 
@@ -62,18 +62,22 @@ $(function() {
             };
           }
 
+          console.log(props);
+
           collection.paths.push({
             method: method,
             url: url,
+            slug: props.title.toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /g, "-"),
+            title: props.title,
             description: props.description,
             params: props.parameters,
             responses: props.responses
           });
 
           if (fresh) {
-            App.sections.push(collection);
+            Flair.sections.push(collection);
           } else {
-            App.sections = _.map(App.sections, function(section) {
+            Flair.sections = _.map(Flair.sections, function(section) {
               if (section.slug === slug) {
                 return collection;
               } else {
@@ -94,7 +98,7 @@ $(function() {
       var $nav = $('.nav');
 
       $nav.prepend(ejs.render($nav.find('script').html(), {
-        sections: App.sections
+        sections: Flair.sections
       }));
     },
 
@@ -102,17 +106,18 @@ $(function() {
       var $content = $('.content');
 
       $content.prepend(ejs.render($content.find('script').html(), {
-        sections: App.sections,
-        base_url: App.config.base_url
+        sections: Flair.sections,
+        base_url: Flair.config.base_url
       }));
     },
 
     delegateEvents: function() {
-      App.initNavLinks();
-      App.initScrollListeners();
-      App.initForms();
+      Flair.initNavLinks();
+      Flair.initScrollListeners();
+      Flair.initForms();
+      Flair.onWindowResize();
 
-      setTimeout(App.onScroll, 300);
+      setTimeout(Flair.onScroll, 300);
     },
 
     initNavLinks: function() {
@@ -149,7 +154,7 @@ $(function() {
         $section.attr("data-top", $section.offset().top);
       });
 
-      $right.on("scroll.content", App.onScroll);
+      $right.on("scroll.content", Flair.onScroll);
     },
 
     onScroll: function(timeout) {
@@ -166,8 +171,8 @@ $(function() {
 
             $section.addClass("fixed");
 
-            clearTimeout(App.scrollTimeout);
-            App.scrollTimeout = setTimeout(function() {
+            clearTimeout(Flair.scrollTimeout);
+            Flair.scrollTimeout = setTimeout(function() {
               $(".nav li").removeClass("active");
               $(".nav a[href='#"+id+"']").closest("li").addClass("active");
             }, 300);
@@ -180,8 +185,8 @@ $(function() {
 
             $section.removeClass("fixed");
 
-            clearTimeout(App.scrollTimeout);
-            App.scrollTimeout = setTimeout(function() {
+            clearTimeout(Flair.scrollTimeout);
+            Flair.scrollTimeout = setTimeout(function() {
               $(".nav li").removeClass("active");
               $li.prev().addClass("active");
             }, 300);
@@ -217,10 +222,10 @@ $(function() {
           data: $form.serialize()
         })
         .done(function(resp, status, xhr) {
-          App.formResponse($form, $btn, xhr.status, xhr.responseJSON);
+          Flair.formResponse($form, $btn, xhr.status, xhr.responseJSON);
         })
         .fail(function(xhr) {
-          App.formResponse($form, $btn, xhr.status, xhr.responseJSON);
+          Flair.formResponse($form, $btn, xhr.status, xhr.responseJSON);
         });
       });
 
@@ -241,8 +246,17 @@ $(function() {
       PR.prettyPrint();
 
       $resp.slideDown();
+    },
+
+    onWindowResize: function() {
+      $(window).on("resize", function() {
+        clearTimeout(Flair.windowResizeTimeout);
+        Flair.windowResizeTimeout = setTimeout(function() {
+          Flair.initScrollListeners();
+        }, 300);
+      });
     }
   };
 
-  App.initialize();
+  Flair.initialize();
 });

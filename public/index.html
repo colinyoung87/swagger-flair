@@ -25,8 +25,8 @@
                 <a href="#<%= section.slug %>" data-main="true"><%= section.title %></a>
                 <ul>
                   <% _.each(section.paths, function(path, index) { %>
-                    <li><a href="#<%= section.slug + '-' + index %>">
-                      <span><%= path.method %></span> <%= path.url %>
+                    <li><a href="#<%= section.slug + '-' + path.slug %>">
+                      <%= path.title %>
                     </a></li>
                   <% }) %>
                 </ul>
@@ -48,12 +48,16 @@
                 <a class="anchor" href="#<%= section.slug %>" data-main="true"></a>
               </span>
               <% _.each(section.paths, function(path, index) { %>
-                <div class="endpoint" id="<%= section.slug + '-' + index %>">
+                <div class="endpoint" id="<%= section.slug + '-' + path.slug %>">
                   <span class="title">
-                    <%= path.method %> <%= path.url %>
-                    <a class="anchor" href="#<%= section.slug + '-' + index %>"></a>
+                    <%= path.title %>
+                    <a class="anchor" href="#<%= section.slug + '-' + path.slug %>"></a>
                   </span>
-                  <span class="desc"><%= path.description %></span>
+                  <span class="url"><strong><%= path.method %></strong> <%= path.url %></span>
+
+                  <% if (path.description) { %>
+                    <span class="desc"><%= path.description %></span>
+                  <% } %>
 
                   <% if (path.params) { %>
                   <div class="boxed code">
