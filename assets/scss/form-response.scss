@@ -3,7 +3,7 @@
   display: none;
 
   .status {
-    background: $primaryColor;
+    background: rgba($primaryColor, .7);
     color: #fff;
     position: relative;
   }

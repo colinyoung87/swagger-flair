@@ -52,11 +52,18 @@
         &:hover .anchor { opacity: 1; }
       }
 
+      > .url {
+        padding: 5px 30px 20px;
+        display: block;
+        font-size: 1em;
+        color: $primaryColor;
+      }
+
       > .desc {
         padding: 5px 30px 30px;
         display: block;
-        font-size: 1em;
-        color: #3f3f3f;
+        font-size: 0.9em;
+        color: rgba($textColor, .7);
       }
 
       > .boxed {

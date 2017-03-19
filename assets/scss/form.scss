@@ -63,6 +63,7 @@
       }
 
       &.processing {
+        background: rgba($primaryColor, 1);
         .text { display: none; }
         .loading-spinner { display: block; }
       }
