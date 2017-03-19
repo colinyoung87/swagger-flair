@@ -53,10 +53,6 @@
         font-size: 1.2em;
 
         .anchor {
-          transform: translate(4px, 7px);
-          width: 24px;
-          height: 24px;
-          background-size: 12px;
           opacity: 0;
         }
         &:hover .anchor { opacity: 1; }

@@ -1,13 +1,13 @@
 .anchor {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border-radius: 6px;
-  transform: translate(6px, 6px);
+  transform: translate(4px, 4px);
 
   background: url("../img/ico-link.png") no-repeat center;
   background-color: rgba($primaryColor, 0.2);
-  background-size: 14px;
+  background-size: 12px;
 
   transition: .3s ease;
 
