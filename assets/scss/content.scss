@@ -8,6 +8,16 @@
     position: relative;
     padding-top: 70px;
 
+    &:first-child {
+      > .title {
+        display: none;
+      }
+
+      > .endpoint {
+        border-top: 0;
+      }
+    }
+
     > .title {
       height: 70px;
       line-height: 70px;
@@ -64,6 +74,7 @@
         display: block;
         font-size: 0.9em;
         color: rgba($textColor, .7);
+        max-width: 660px;
       }
 
       > .boxed {

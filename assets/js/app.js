@@ -18,7 +18,7 @@ $(function() {
     boot: function(docs) {
       window.addEventListener('popstate', Flair.toHashSection);
 
-      Flair.buildSections(docs.paths);
+      Flair.buildSections(docs);
       Flair.setTitle(docs.info.title);
       Flair.renderNav();
       Flair.renderContent();
@@ -41,8 +41,19 @@ $(function() {
       });
     },
 
-    buildSections: function(paths) {
-      var collection, slug, fresh;
+    buildSections: function(docs) {
+      var paths = docs.paths,
+          collection, slug, fresh;
+
+      Flair.sections = [{
+        slug: "home",
+        title: "Home",
+        paths: [{
+          title: docs.info.title,
+          description: docs.info.description,
+          slug: "top"
+        }]
+      }];
 
       _.each(paths, function(data, url) {
         _.each(data, function(props, method) {
@@ -61,8 +72,6 @@ $(function() {
               paths: []
             };
           }
-
-          console.log(props);
 
           collection.paths.push({
             method: method,
@@ -115,7 +124,6 @@ $(function() {
       Flair.initNavLinks();
       Flair.initScrollListeners();
       Flair.initForms();
-      Flair.onWindowResize();
 
       setTimeout(Flair.onScroll, 300);
     },
@@ -247,15 +255,6 @@ $(function() {
 
       $resp.slideDown();
     },
-
-    onWindowResize: function() {
-      $(window).on("resize", function() {
-        clearTimeout(Flair.windowResizeTimeout);
-        Flair.windowResizeTimeout = setTimeout(function() {
-          Flair.initScrollListeners();
-        }, 300);
-      });
-    }
   };
 
   Flair.initialize();

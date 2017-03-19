@@ -14,15 +14,15 @@
   text-indent: -9999em;
   border-top: 0.5em solid rgba($primaryColor, 0.1);
   border-right: 0.5em solid rgba($primaryColor, 0.1);
-  border-bottom: 0.5em solid rgba($primaryColor, 0.1);
+  border-bottom: 0.5em solid rgba($primaryColor, 1);
   border-left: 0.5em solid $primaryColor;
-  -webkit-animation: spinner 1.1s infinite linear;
-  animation: spinner 1.1s infinite linear;
+  -webkit-animation: spinner 0.4s infinite linear;
+  animation: spinner 0.4s infinite linear;
 
   &.-white {
     border-top: 0.5em solid rgba(#fff, 0.1);
     border-right: 0.5em solid rgba(#fff, 0.1);
-    border-bottom: 0.5em solid rgba(#fff, 0.1);
+    border-bottom: 0.5em solid rgba(#fff, 1);
     border-left: 0.5em solid #fff;
   }
 }
