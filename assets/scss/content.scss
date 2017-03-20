@@ -78,6 +78,10 @@
         margin-right: 30px;
         padding: 10px 20px;
         width: 656px;
+
+        @media screen and (max-width: 1024px) {
+          width: calc(100% - 60px);
+        }
       }
     }
   }

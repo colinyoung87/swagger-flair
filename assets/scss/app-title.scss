@@ -15,8 +15,28 @@
     line-height: 70px;
     color: $primaryColor;
 
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
+
     a {
       text-decoration: none;
+    }
+  }
+
+  > .menu-btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background: url('../img/ico-menu.png') no-repeat center;
+    background-size: 70%;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    opacity: .7;
+
+    @media screen and (max-width: 1024px) {
+      display: block;
     }
   }
 }

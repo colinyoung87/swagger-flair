@@ -9,6 +9,9 @@ body, html {
   font-size: 16px;
   background: #f9f9f9; }
 
+body {
+  overflow: hidden; }
+
 .wrapper {
   width: 100%;
   min-width: 1024px;
@@ -39,15 +42,38 @@ a {
   right: 0;
   top: 0;
   opacity: 1;
-  transition: opacity 1s ease; }
+  transition: opacity 1s ease;
+  border-top: 1px solid #e6e6e6; }
 
 @media screen and (max-width: 1024px) {
-  .left, .right {
+  .wrapper {
+    min-width: inherit;
+    position: absolute;
+    left: -260px;
+    width: calc(100% + 260px);
+    transition: left 0.3s ease; }
+
+  body.menu-open .wrapper {
+    left: 0; }
+
+  .left {
     position: relative;
     left: auto;
     right: auto;
     top: auto;
-    float: left; } }
+    float: left;
+    width: 308px; } }
+  @media screen and (max-width: 1024px) and (max-width: 324px) {
+    .left {
+      width: 90%; } }
+
+@media screen and (max-width: 1024px) {
+  .right {
+    right: 0;
+    left: 308px;
+    position: absolute;
+    width: auto;
+    min-width: inherit; } }
 body.loading .app-loading {
   opacity: 1; }
 body.loading .left {
@@ -90,8 +116,24 @@ body.loading .content {
     height: 70px;
     line-height: 70px;
     color: #ff7840; }
+    @media screen and (max-width: 1024px) {
+      .app-title > h1 {
+        width: 100%; } }
     .app-title > h1 a {
       text-decoration: none; }
+  .app-title > .menu-btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background: url("../img/ico-menu.png") no-repeat center;
+    background-size: 70%;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    opacity: .7; }
+    @media screen and (max-width: 1024px) {
+      .app-title > .menu-btn {
+        display: block; } }
 
 .nav {
   width: 307px;
@@ -100,6 +142,9 @@ body.loading .content {
   float: right;
   border-right: 1px solid #e6e6e6;
   font-size: 1em; }
+  @media screen and (max-width: 1024px) {
+    .nav {
+      width: 100%; } }
   .nav a {
     text-decoration: none;
     color: #666666; }
@@ -194,6 +239,9 @@ body.loading .content {
         margin-right: 30px;
         padding: 10px 20px;
         width: 656px; }
+        @media screen and (max-width: 1024px) {
+          .content > .section > .endpoint > .boxed {
+            width: calc(100% - 60px); } }
 
 .code {
   background: #454545;
@@ -427,17 +475,17 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: 0.5em solid rgba(255, 120, 64, 0.1);
-  border-right: 0.5em solid rgba(255, 120, 64, 0.1);
-  border-bottom: 0.5em solid #ff7840;
-  border-left: 0.5em solid #ff7840;
+  border-top: 0.3em solid rgba(255, 120, 64, 0.1);
+  border-right: 0.3em solid rgba(255, 120, 64, 0.1);
+  border-bottom: 0.3em solid #ff7840;
+  border-left: 0.3em solid #ff7840;
   -webkit-animation: spinner 0.4s infinite linear;
   animation: spinner 0.4s infinite linear; }
   .loading-spinner.-white {
-    border-top: 0.5em solid rgba(255, 255, 255, 0.1);
-    border-right: 0.5em solid rgba(255, 255, 255, 0.1);
-    border-bottom: 0.5em solid white;
-    border-left: 0.5em solid #fff; }
+    border-top: 0.3em solid rgba(255, 255, 255, 0.1);
+    border-right: 0.3em solid rgba(255, 255, 255, 0.1);
+    border-bottom: 0.3em solid white;
+    border-left: 0.3em solid #fff; }
 
 @-webkit-keyframes spinner {
   0% {

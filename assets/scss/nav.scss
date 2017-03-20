@@ -6,6 +6,10 @@
   border-right: 1px solid $borderColor;
   font-size: 1em;
 
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+
   a {
     text-decoration: none;
     color: $strongTextColor;

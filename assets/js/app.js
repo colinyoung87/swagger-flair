@@ -99,8 +99,8 @@ $(function() {
     },
 
     setTitle: function(title) {
-      $('.js-app-title').html(title + " docs");
-      $('title').html(title + " docs");
+      $('.js-app-title').html(title);
+      $('title').html(title);
     },
 
     renderNav: function() {
@@ -124,6 +124,7 @@ $(function() {
       Flair.initNavLinks();
       Flair.initScrollListeners();
       Flair.initForms();
+      Flair.initMenuBtn();
 
       setTimeout(Flair.onScroll, 300);
     },
@@ -255,6 +256,14 @@ $(function() {
 
       $resp.slideDown();
     },
+
+    initMenuBtn: function() {
+      $(document).on("click", ".menu-btn", function(ev){
+        ev.preventDefault();
+
+        $("body").toggleClass("menu-open");
+      });
+    }
   };
 
   Flair.initialize();

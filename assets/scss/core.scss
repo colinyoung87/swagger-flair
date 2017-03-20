@@ -11,6 +11,10 @@ body, html {
   background: $subtleColor;
 }
 
+body {
+  overflow: hidden;
+}
+
 .wrapper {
   width: 100%;
   min-width: 1024px;
@@ -45,14 +49,40 @@ a {
   top: 0;
   opacity: 1;
   transition: opacity 1s ease;
+  border-top: 1px solid $borderColor;
 }
 
 @media screen and (max-width: 1024px) {
-  .left, .right {
+  .wrapper {
+    min-width: inherit;
+    position: absolute;
+    left: -260px;
+    width: calc(100% + 260px);
+    transition: left 0.3s ease;
+  }
+
+  body.menu-open .wrapper {
+    left: 0;
+  }
+
+  .left {
     position: relative;
     left: auto;
     right: auto;
     top: auto;
     float: left;
+    width: 308px;
+
+    @media screen and (max-width: 324px) {
+      width: 90%;
+    }
+  }
+
+  .right {
+    right: 0;
+    left: 308px;
+    position: absolute;
+    width: auto;
+    min-width: inherit;
   }
 }
