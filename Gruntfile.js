@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'assets/scss/build/app.css' : 'assets/scss/app.scss'
+          'lib/swagger/assets/app.css' : 'assets/scss/app.scss'
         }
       }
     },
@@ -14,9 +14,9 @@ module.exports = function(grunt) {
       my_target: {
         files: [{
           expand: true,
-          cwd: 'assets/scss/build/',
+          cwd: 'lib/swagger/assets/',
           src: ['app.css'], // 1
-          dest: 'public/css/',
+          dest: 'lib/swagger/assets/',
           ext: '.min.css'
         }]
       }
@@ -24,8 +24,13 @@ module.exports = function(grunt) {
 
     uglify: {
       build : {
+        options: {
+          beautify: true,
+          mangle: false,
+          compress: false
+        },
         files : {
-          'public/js/app.min.js' : [
+          'lib/swagger/assets/app.js' : [
             // bower components
             'components/jquery/dist/jquery.js',
             'components/underscore/underscore.js',
