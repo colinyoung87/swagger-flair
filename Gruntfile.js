@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'assets/scss/build/',
           src: ['app.css'], // 1
-          dest: 'public/css/',
+          dest: 'lib/swagger/assets/',
           ext: '.min.css'
         }]
       }
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     uglify: {
       build : {
         files : {
-          'public/js/app.min.js' : [
+          'lib/swagger/assets/app.min.js' : [
             // bower components
             'components/jquery/dist/jquery.js',
             'components/underscore/underscore.js',
