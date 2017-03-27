@@ -107,19 +107,21 @@ $(function() {
 
     renderNav: function() {
       var $nav = $('.nav');
-
-      $nav.prepend(ejs.render($nav.find('script').html(), {
+      var html = ejs.render(Flair.templates.nav, {
         sections: Flair.sections
-      }));
+      });
+
+      $nav.prepend(html);
     },
 
     renderContent: function() {
       var $content = $('.content');
-
-      $content.prepend(ejs.render($content.find('script').html(), {
+      var html = ejs.render(Flair.templates.section, {
         sections: Flair.sections,
         base_url: Flair.config.base_url
-      }));
+      });
+
+      $content.prepend(html);
     },
 
     delegateEvents: function() {
@@ -267,6 +269,103 @@ $(function() {
       });
     }
   };
+
+  Flair.templates = {};
+  Flair.templates.nav = "
+    <ul>
+      <% _.each(sections, function(section) { %>
+        <li>
+          <a href=\"#<%= section.slug %>\" data-main=\"true\"><%= section.title %></a>
+          <% if (section.slug !== \"home\") { %>
+            <ul>
+              <% _.each(section.paths, function(path, index) { %>
+                <li><a href=\"#<%= section.slug + '-' + path.slug %>\">
+                  <%= path.title %>
+                </a></li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  ";
+
+  Flair.templates.section = "
+    <% _.each(sections, function(section) { %>
+    <div class=\"section\" id=\"<%= section.slug %>\">
+      <span class=\"title\">
+        <%= section.title %>
+        <a class=\"anchor\" href=\"#<%= section.slug %>\" data-main=\"true\"></a>
+      </span>
+      <% _.each(section.paths, function(path, index) { %>
+        <div class=\"endpoint\" id=\"<%= section.slug + '-' + path.slug %>\">
+          <span class=\"title\">
+            <%= path.title %>
+            <a class=\"anchor\" href=\"#<%= section.slug + '-' + path.slug %>\"></a>
+          </span>
+
+          <% if (path.method || path.url) { %>
+            <span class=\"url\"><strong><%= path.method %></strong> <%= path.url %></span>
+          <% } %>
+
+          <% if (path.description) { %>
+            <span class=\"desc\"><%= path.description %></span>
+          <% } %>
+
+          <% if (path.params) { %>
+          <div class=\"boxed code\">
+<code class=\"prettyprint\"><!--
+-->params: {
+<% _.each(path.params, function(param) { %><!--
+-->    <%= param.name %>: , # <%= param.type %><% if (param.required) { %>, required<% } %>
+<% }) %><!--
+-->}<!--
+--></code>
+          </div>
+          <% } %>
+
+          <% if (path.responses) { %>
+            <div class=\"boxed responses\">
+              <h3>Responses</h3>
+              <% _.each(path.responses, function(response, code) { %>
+                <p><%= code %> - <%= response.description %></p>
+              <% }) %>
+            </div>
+          <% } %>
+
+          <% if (path.method || path.url) { %>
+            <form class=\"boxed form\" action=\"<%= base_url + path.url %>\" method=\"<%= path.method %>\">
+              <h3>Give it a go</h3>
+              <% _.each(path.params, function(param) { %>
+                <div class=\"form-group\">
+                  <label><%= param.name %><%= param.required ? \"*\" : \"\" %></label>
+                  <input type=\"text\" name=\"<%= param.name %>\">
+                </div>
+              <% }) %>
+              <div class=\"form-actions <%= path.params ? '' : '-no-border' %>\">
+                <button>
+                  <span class=\"text\">Submit</span>
+                  <span class=\"loading-spinner -white\"></span>
+                </button>
+              </div>
+            </form>
+          <% } %>
+
+          <div class=\"boxed form-response\">
+            <div class=\"status\">
+              <a href=\"#\" class=\"close\">Hide response</a>
+              <h3>Response Status: <span>200</span></h3>
+            </div>
+
+            <div class=\"code\">
+              <code class=\"prettyprint\"></code>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% }) %>
+  ";
 
   Flair.initialize();
 });
