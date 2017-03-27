@@ -22,7 +22,7 @@ module Swagger
       def call(env)
         current_dir   = File.expand_path(File.dirname(__FILE__))
         template      = File.new(current_dir + "/index.erb").read
-        html = ERB.new(template, nil, "%").result(binding)
+        html          = ERB.new(template, nil, "%").result(binding)
 
         # Status, headers, string response
         [200, {}, html]
