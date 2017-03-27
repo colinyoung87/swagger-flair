@@ -4,8 +4,13 @@
   <title>SwaggerFlair</title>
 
   <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
-  <link rel="stylesheet" href="<%= @base_url %>/app.min.css">
-  <script type="text/javascript" src="<%= @base_url %>/config.js"></script>
+  <link rel="stylesheet" href="<%= @base_url %>/app.css">
+  <script type="text/javascript">
+    window.config = {
+      base_url: "<%= @options[:base_url] %>",
+      docs_url: "<%= @options[:docs_url] %>"
+    };
+  </script>
 </head>
 <body class="loading">
   <div class="wrapper">

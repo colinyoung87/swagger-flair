@@ -125,7 +125,7 @@ body.loading .content {
     display: none;
     width: 30px;
     height: 30px;
-    background: url("../img/ico-menu.png") no-repeat center;
+    background: url("ico-menu.png") no-repeat center;
     background-size: 70%;
     position: absolute;
     right: 10px;
@@ -449,7 +449,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
   height: 24px;
   border-radius: 6px;
   transform: translate(4px, 4px);
-  background: url("../img/ico-link.png") no-repeat center;
+  background: url("ico-link.png") no-repeat center;
   background-color: rgba(255, 120, 64, 0.2);
   background-size: 12px;
   transition: .3s ease; }
