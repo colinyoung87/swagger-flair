@@ -18,6 +18,8 @@ $(function() {
     boot: function(docs) {
       window.addEventListener('popstate', Flair.toHashSection);
 
+      console.log("Flair boot", docs);
+
       Flair.buildSections(docs);
       Flair.setTitle(docs.info.title);
       Flair.renderNav();
@@ -57,7 +59,7 @@ $(function() {
 
       _.each(paths, function(data, url) {
         _.each(data, function(props, method) {
-          slug = props.tags[0].toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /, "-");
+          slug = String(props.tags[0]).toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /, "-");
 
           collection = _.find(Flair.sections, function(section) {
             return section.slug === slug;
@@ -76,7 +78,7 @@ $(function() {
           collection.paths.push({
             method: method,
             url: url,
-            slug: props.title.toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /g, "-"),
+            slug: String(props.title).toLowerCase().replace(/[^a-z0-9 -_]/g, "").replace(/ /g, "-"),
             title: props.title,
             description: props.description,
             params: props.parameters,
