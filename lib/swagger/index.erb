@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SwaggerFlair</title>
+  <title><%= @resp["info"]["title"] %></title>
 
   <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="<%= @base_url %>/app.css">
-  <script type="text/javascript">
-    window.config = {
-      base_url: "<%= @options[:base_url] %>",
-      docs_url: "<%= @options[:docs_url] %>"
-    };
-  </script>
 </head>
 <body class="loading">
   <div class="wrapper">
@@ -20,14 +14,104 @@
 
     <div class="left">
       <div class="app-title">
-        <h1><a href="#" class="js-app-title"></a></h1>
+        <h1><a href="#" class="js-app-title"><%= @resp["info"]["title"] %></a></h1>
         <a href="#" class="menu-btn"></a>
       </div>
-      <div class="nav"></div>
+      <div class="nav">
+        <ul>
+          <% @sections.each do |section| %>
+            <li>
+              <a href="#<%= section[:slug] %>" data-main="true"><%= section[:title] %></a>
+              <% if section[:slug] != "home" %>
+                <ul>
+                  <% section[:paths].each do |path| %>
+                    <li><a href="#<%= section[:slug] %>-<%= path[:slug] %>">
+                      <%= path[:title] %>
+                    </a></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
 
     <div class="right">
       <div class="content">
+        <% @sections.each do |section| %>
+          <div class="section" id="<%= section[:slug] %>">
+            <span class="title">
+              <%= section[:title] %>
+              <a class="anchor" href="#<%= section[:slug] %>" data-main="true"></a>
+            </span>
+            <% section[:paths].each do |path| # index %>
+              <div class="endpoint" id="<%= section[:slug] %>-<%= path[:slug] %>">
+                <span class="title">
+                  <%= path[:title] %>
+                  <a class="anchor" href="#<%= section[:slug] %>-<%= path[:slug] %>"></a>
+                </span>
+
+                <% if path[:method] || path[:url] %>
+                  <span class="url"><strong><%= path[:method] %></strong> <%= path[:url] %></span>
+                <% end %>
+
+                <% if path[:description] %>
+                  <span class="desc"><%= path[:description] %></span>
+                <% end %>
+
+                <% if path["params"] %>
+<div class="boxed code"><code class="prettyprint"><!--
+-->params: {
+<% paths[:params].each do |param| %><!--
+-->    <%= param[:name] %>: , # <%= param[:type] %><%= param[:required] ? "required" : "" %>
+<% end %><!--
+-->}<!--
+--></code></div>
+                <% end %>
+
+                <% if path[:responses] %>
+                  <div class="boxed responses">
+                    <h3>Responses</h3>
+                    <% path[:responses].each do |code, resp| %>
+                      <p><%= code %> - <%= resp["description"] %></p>
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <% if path[:method] || path[:url] %>
+                  <form class="boxed form" action="<%= @options[:base_url] + path[:url] %>" method="<%= path[:method] %>">
+                    <h3>Give it a go</h3>
+                    <% path[:params].to_a.each do |param| %>
+                      <div class="form-group">
+                        <label><%= param["name"] %><%= param["required"] ? "*" : "" %></label>
+                        <input type="text" name="<%= param["name"] %>">
+                      </div>
+                    <% end %>
+                    <div class="form-actions <%= path[:params] ? '' : '-no-border' %>">
+                      <button>
+                        <span class="text">Submit</span>
+                        <span class="loading-spinner -white"></span>
+                      </button>
+                    </div>
+                  </form>
+                <% end %>
+
+                <div class="boxed form-response">
+                  <div class="status">
+                    <a href="#" class="close">Hide response</a>
+                    <h3>Response Status: <span>200</span></h3>
+                  </div>
+
+                  <div class="code">
+                    <code class="prettyprint"></code>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
         <div class="footer">
           Built with <a href="https://github.com/colinyoung87/swagger-flair">SwaggerFlair</a>
         </div>
@@ -36,6 +120,6 @@
   </div>
 
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  <script type="text/javascript" src="<%= @base_url %>/app.js"></script>
+  <script type="text/javascript" src="<%= @base_url %>/app.js?v="></script>
 </body>
 </html>
