@@ -11,7 +11,7 @@ https://github.com/phawk/sinatra-api
 https://github.com/fotinakis/swagger-blocks
 
 ## Screenshot
-![screenshot](https://raw.githubusercontent.com/colinyoung87/swagger-flair/master/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/colinyoung87/swagger-flair/master/screenshot-2017-04-02.png)
 
 ## Getting Started
 
