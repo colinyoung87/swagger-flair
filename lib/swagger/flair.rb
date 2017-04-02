@@ -61,7 +61,8 @@ module Swagger
               title: props["title"],
               description: props["description"],
               params: props["parameters"],
-              responses: props["responses"]
+              responses: props["responses"],
+              security: props["security"]
             })
 
             if fresh

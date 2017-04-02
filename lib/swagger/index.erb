@@ -88,6 +88,18 @@
                         <input type="text" name="<%= param["name"] %>">
                       </div>
                     <% end %>
+
+                    <% if path[:security] %>
+                      <% path[:security].to_a.each do |param| %>
+                        <% param.each do |key, val| %>
+                          <div class="form-group">
+                            <label><%= key %>*</label>
+                            <input type="text" name="<%= key %>">
+                          </div>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+
                     <div class="form-actions <%= path[:params] ? '' : '-no-border' %>">
                       <button>
                         <span class="text">Submit</span>
