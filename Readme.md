@@ -2,6 +2,8 @@
 
 UI for swagger generated documentation.
 
+---
+
 Initially built to work with a Sinatra API, using swagger v2.0 to output documentation in JSON format.
 
 https://github.com/phawk/sinatra-api
