@@ -9,7 +9,9 @@ https://github.com/fotinakis/swagger-blocks
 ## Getting Started
 
 Add to your Gemfile:
-`gem 'swagger-flair', :git => 'git://github.com/colinyoung87/swagger-flair.git'`
+```sh
+gem 'swagger-flair', :git => 'git://github.com/colinyoung87/swagger-flair.git'
+```
 
 In Sinatra, update your `config.ru` file:
 ```sh
