@@ -6,6 +6,7 @@ Initially built to work with a Sinatra API, using swagger v2.0 to output documen
 https://github.com/phawk/sinatra-api
 https://github.com/fotinakis/swagger-blocks
 
+![screenshot](https://raw.githubusercontent.com/colinyoung87/swagger-flair/master/screenshot.png)
 
 ## Getting Started
 
